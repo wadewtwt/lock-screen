@@ -1,0 +1,23 @@
+2026-03-26 17:12:23.314 +08:00 [INF] Application started.
+2026-03-26 17:12:32.564 +08:00 [WRN] Unlock failed. Failed attempts: 1
+2026-03-26 17:12:35.673 +08:00 [WRN] Unlock failed. Failed attempts: 2
+2026-03-26 17:12:50.546 +08:00 [WRN] Unlock failed. Failed attempts: 3
+2026-03-26 17:12:54.702 +08:00 [WRN] Unlock failed. Failed attempts: 4
+2026-03-26 17:12:59.178 +08:00 [WRN] Unlock failed. Failed attempts: 5
+2026-03-26 17:12:59.389 +08:00 [WRN] Unlock failed. Failed attempts: 6
+2026-03-26 17:13:09.267 +08:00 [WRN] Unlock failed. Failed attempts: 7
+2026-03-26 17:13:09.461 +08:00 [WRN] Unlock failed. Failed attempts: 8
+2026-03-26 17:13:09.649 +08:00 [WRN] Unlock failed. Failed attempts: 9
+2026-03-26 17:13:25.900 +08:00 [INF] Application stopped.
+2026-03-26 17:15:11.026 +08:00 [INF] Application started.
+2026-03-26 17:15:19.649 +08:00 [INF] Unlock succeeded after 0 failed attempts.
+2026-03-26 17:15:19.678 +08:00 [INF] Application stopped.
+2026-03-26 17:16:53.826 +08:00 [INF] Application started.
+2026-03-26 17:16:55.627 +08:00 [INF] Lock screen dismissed with Enter key.
+2026-03-26 17:16:55.659 +08:00 [INF] Application stopped.
+2026-03-26 17:17:00.470 +08:00 [INF] Application started.
+2026-03-26 17:17:14.946 +08:00 [INF] Lock screen dismissed with Enter key.
+2026-03-26 17:17:14.969 +08:00 [INF] Application stopped.
+2026-03-26 17:18:43.299 +08:00 [INF] Application started.
+2026-03-26 17:18:55.812 +08:00 [INF] Lock screen dismissed with Enter key.
+2026-03-26 17:18:55.849 +08:00 [INF] Application stopped.
