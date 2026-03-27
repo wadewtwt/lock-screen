@@ -1,41 +1,134 @@
 <Window x:Class="LockScreen.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:LockScreen.App.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LockScreen.App"
         mc:Ignorable="d"
         Title="Lock Screen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowState="Maximized"
         Topmost="True"
-        Background="#101828"
+        ShowInTaskbar="False"
         KeyDown="Window_OnKeyDown">
-    <Grid Margin="48">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Window.Resources>
+        <RadialGradientBrush x:Key="BackgroundGlowTopLeft" Center="0.18,0.18" RadiusX="0.55" RadiusY="0.45">
+            <GradientStop Color="#2A3658FF" Offset="0" />
+            <GradientStop Color="#00000000" Offset="1" />
+        </RadialGradientBrush>
+        <RadialGradientBrush x:Key="BackgroundGlowTopRight" Center="0.8,0.2" RadiusX="0.5" RadiusY="0.4">
+            <GradientStop Color="#1F00DCAA" Offset="0" />
+            <GradientStop Color="#00000000" Offset="1" />
+        </RadialGradientBrush>
+        <RadialGradientBrush x:Key="BackgroundGlowBottom" Center="0.55,0.95" RadiusX="0.6" RadiusY="0.45">
+            <GradientStop Color="#16FFC640" Offset="0" />
+            <GradientStop Color="#00000000" Offset="1" />
+        </RadialGradientBrush>
+        <DrawingBrush x:Key="DotGridBrush"
+                      TileMode="Tile"
+                      Viewport="0,0,14,14"
+                      ViewportUnits="Absolute"
+                      Viewbox="0,0,14,14"
+                      ViewboxUnits="Absolute"
+                      Stretch="None">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#00000000" Geometry="M0,0 H14 V14 H0 Z" />
+                    <GeometryDrawing Brush="#18FFFFFF" Geometry="M5,5 A2,2 0 1 1 9,5 A2,2 0 1 1 5,5 Z" />
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <DrawingBrush x:Key="DotMaskBrush"
+                      TileMode="Tile"
+                      Viewport="0,0,16,16"
+                      ViewportUnits="Absolute"
+                      Viewbox="0,0,16,16"
+                      ViewboxUnits="Absolute"
+                      Stretch="None">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#00000000" Geometry="M0,0 H16 V16 H0 Z" />
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="M5,5 A3,3 0 1 1 11,5 A3,3 0 1 1 5,5 Z" />
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Window.Resources>
 
-        <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="{Binding CurrentTime}"
-                       FontSize="64"
-                       FontWeight="SemiBold"
-                       Foreground="White" />
-            <TextBlock Margin="0,12,0,0"
-                       Text="{Binding CurrentDate}"
-                       FontSize="24"
-                       Foreground="#B8C1CC" />
-            <TextBlock Margin="0,40,0,0"
-                       Text="Press Enter to exit lock screen"
-                       FontSize="20"
-                       Foreground="White" />
-        </StackPanel>
+    <Grid Background="#06090F">
+        <Rectangle Fill="{StaticResource BackgroundGlowTopLeft}" />
+        <Rectangle Fill="{StaticResource BackgroundGlowTopRight}" />
+        <Rectangle Fill="{StaticResource BackgroundGlowBottom}" />
+        <Rectangle Fill="{StaticResource DotGridBrush}" Opacity="0.8" />
 
-        <TextBlock Grid.Row="1"
-                   Text="{Binding StatusMessage}"
-                   FontSize="14"
-                   Foreground="#98A2B3" />
+        <Grid Margin="64">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel VerticalAlignment="Center">
+                <Border HorizontalAlignment="Left"
+                        Padding="26"
+                        CornerRadius="20"
+                        Background="#14000000"
+                        BorderBrush="#24FFFFFF"
+                        BorderThickness="1">
+                    <StackPanel>
+                        <controls:DotMatrixTextBlock Text="DOT LOCK"
+                                                     DotSize="6"
+                                                     DotGap="4"
+                                                     CharacterSpacing="2"
+                                                     OnBrush="#CCFFFFFF"
+                                                     OffBrush="#18FFFFFF"
+                                                     GlowBrush="#60FFFFFF" />
+
+                        <controls:DotMatrixTextBlock Margin="0,18,0,0"
+                                                     Text="{Binding CurrentTime}"
+                                                     DotSize="12"
+                                                     DotGap="6"
+                                                     CharacterSpacing="2"
+                                                     OnBrush="#FFFFFFFF"
+                                                     OffBrush="#14FFFFFF"
+                                                     GlowBrush="#90FFFFFF" />
+
+                        <controls:DotMatrixTextBlock Margin="0,12,0,0"
+                                                     Text="{Binding CurrentDate}"
+                                                     DotSize="5"
+                                                     DotGap="4"
+                                                     CharacterSpacing="1"
+                                                     OnBrush="#D9F7FFFF"
+                                                     OffBrush="#142CCEFF"
+                                                     GlowBrush="#7025E9FF" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    Padding="20,14"
+                    Background="#12000000"
+                    BorderBrush="#1FFFFFFF"
+                    BorderThickness="1"
+                    CornerRadius="16">
+                <DockPanel>
+                    <controls:DotMatrixTextBlock DockPanel.Dock="Left"
+                                                 Text="{Binding StatusMessage}"
+                                                 DotSize="3"
+                                                 DotGap="3"
+                                                 CharacterSpacing="1"
+                                                 OnBrush="#9BE8FFFF"
+                                                 OffBrush="#102CCEFF"
+                                                 GlowBrush="#5025E9FF" />
+                    <controls:DotMatrixTextBlock HorizontalAlignment="Right"
+                                                 Text="ENTER TO DISMISS"
+                                                 DotSize="3"
+                                                 DotGap="3"
+                                                 CharacterSpacing="1"
+                                                 OnBrush="#CCFFFFFF"
+                                                 OffBrush="#14FFFFFF"
+                                                 GlowBrush="#70FFFFFF" />
+                </DockPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

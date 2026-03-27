@@ -2,7 +2,6 @@ D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App.cs
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\App.g.cs
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App_MarkupCompile.cache
-D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App_MarkupCompile.lref
 D:\work\ai\lock-screen\LockScreen.App\bin\Debug\net8.0-windows\LockScreen.App.exe
 D:\work\ai\lock-screen\LockScreen.App\bin\Debug\net8.0-windows\LockScreen.App.deps.json
 D:\work\ai\lock-screen\LockScreen.App\bin\Debug\net8.0-windows\LockScreen.App.runtimeconfig.json
@@ -23,3 +22,5 @@ D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\refint\LockScreen
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App.pdb
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App.genruntimeconfig.cache
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\ref\LockScreen.App.dll
+D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App_MarkupCompile.lref
