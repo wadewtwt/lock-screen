@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         Topmost="True"
         ShowInTaskbar="False"
+        PreviewKeyDown="Window_OnPreviewKeyDown"
         KeyDown="Window_OnKeyDown">
 
     <Window.Resources>
@@ -102,9 +103,30 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="SmallIconBtn" TargetType="Button" BasedOn="{StaticResource IconBtn}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
-    <Grid Background="{Binding BackgroundBaseBrush}">
+    <Grid x:Name="RootGrid" Background="{Binding BackgroundBaseBrush}">
         <Rectangle Fill="{Binding GlowTopLeftBrush}" />
         <Rectangle Fill="{Binding GlowTopRightBrush}" />
         <Rectangle Fill="{Binding GlowBottomBrush}" />
@@ -181,13 +203,51 @@
             </Border>
         </Grid>
 
-        <Button Style="{StaticResource IconBtn}"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Margin="28"
-                Command="{Binding ToggleSettingsPanelCommand}"
-                ToolTip="Settings"
-                Content="⚙" />
+        <Grid VerticalAlignment="Bottom"
+              HorizontalAlignment="Right"
+              Margin="28">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border x:Name="SettingsHintBubble"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,0,10"
+                    Padding="10,6"
+                    Background="#A6101420"
+                    BorderBrush="#35FFFFFF"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Visibility="Collapsed">
+                <TextBlock Text="setting me"
+                           Foreground="#E8FFFFFF"
+                           FontFamily="Consolas"
+                           FontSize="11" />
+            </Border>
+
+            <Button Grid.Row="1"
+                    Style="{StaticResource IconBtn}"
+                    HorizontalAlignment="Right"
+                    Command="{Binding ToggleSettingsPanelCommand}"
+                    ToolTip="Settings"
+                    Content="⚙" />
+        </Grid>
+
+        <Rectangle Fill="#01000000"
+                   MouseLeftButtonDown="SettingsOverlay_OnMouseLeftButtonDown">
+            <Rectangle.Style>
+                <Style TargetType="Rectangle">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSettingsPanelOpen}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Rectangle.Style>
+        </Rectangle>
 
         <Border HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
@@ -211,14 +271,13 @@
                 <StackPanel Margin="28,36,28,28">
                     <DockPanel Margin="0,0,0,28">
                         <Button DockPanel.Dock="Right"
-                                Style="{StaticResource IconBtn}"
+                                Style="{StaticResource SmallIconBtn}"
                                 Command="{Binding ToggleSettingsPanelCommand}"
-                                FontSize="14"
                                 Content="×" />
                         <controls:DotMatrixTextBlock Text="SETTINGS"
-                                                     DotSize="5"
-                                                     DotGap="3"
-                                                     CharacterSpacing="2"
+                                                     DotSize="4"
+                                                     DotGap="2"
+                                                     CharacterSpacing="1"
                                                      OnBrush="#FFFFFFFF"
                                                      OffBrush="#18FFFFFF"
                                                      GlowBrush="#60FFFFFF"

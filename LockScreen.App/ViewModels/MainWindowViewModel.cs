@@ -133,6 +133,13 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void CloseSettingsPanel()
+    {
+        IsSettingsPanelOpen = false;
+        IsColorPaletteOpen = false;
+    }
+
+    [RelayCommand]
     private void ToggleColorPalette()
     {
         IsColorPaletteOpen = !IsColorPaletteOpen;
