@@ -11,19 +11,8 @@
         Topmost="True"
         ShowInTaskbar="False"
         KeyDown="Window_OnKeyDown">
+
     <Window.Resources>
-        <RadialGradientBrush x:Key="BackgroundGlowTopLeft" Center="0.18,0.18" RadiusX="0.55" RadiusY="0.45">
-            <GradientStop Color="#2A3658FF" Offset="0" />
-            <GradientStop Color="#00000000" Offset="1" />
-        </RadialGradientBrush>
-        <RadialGradientBrush x:Key="BackgroundGlowTopRight" Center="0.8,0.2" RadiusX="0.5" RadiusY="0.4">
-            <GradientStop Color="#1F00DCAA" Offset="0" />
-            <GradientStop Color="#00000000" Offset="1" />
-        </RadialGradientBrush>
-        <RadialGradientBrush x:Key="BackgroundGlowBottom" Center="0.55,0.95" RadiusX="0.6" RadiusY="0.45">
-            <GradientStop Color="#16FFC640" Offset="0" />
-            <GradientStop Color="#00000000" Offset="1" />
-        </RadialGradientBrush>
         <DrawingBrush x:Key="DotGridBrush"
                       TileMode="Tile"
                       Viewport="0,0,14,14"
@@ -38,26 +27,87 @@
                 </DrawingGroup>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-        <DrawingBrush x:Key="DotMaskBrush"
-                      TileMode="Tile"
-                      Viewport="0,0,16,16"
-                      ViewportUnits="Absolute"
-                      Viewbox="0,0,16,16"
-                      ViewboxUnits="Absolute"
-                      Stretch="None">
-            <DrawingBrush.Drawing>
-                <DrawingGroup>
-                    <GeometryDrawing Brush="#00000000" Geometry="M0,0 H16 V16 H0 Z" />
-                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="M5,5 A3,3 0 1 1 11,5 A3,3 0 1 1 5,5 Z" />
-                </DrawingGroup>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+
+        <Style x:Key="SettingsInput" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#E8FFFFFF" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="CaretBrush" Value="White" />
+            <Setter Property="SelectionBrush" Value="#5000AAFF" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="CharacterCasing" Value="Upper" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="ThemeBtn" TargetType="Button">
+            <Setter Property="Foreground" Value="#99FFFFFF" />
+            <Setter Property="Background" Value="#12FFFFFF" />
+            <Setter Property="BorderBrush" Value="#20FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#22FFFFFF" />
+                    <Setter Property="BorderBrush" Value="#40FFFFFF" />
+                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="IconBtn" TargetType="Button">
+            <Setter Property="Background" Value="#18FFFFFF" />
+            <Setter Property="Foreground" Value="#99FFFFFF" />
+            <Setter Property="BorderBrush" Value="#25FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50"
+                                Width="36"
+                                Height="36">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#30FFFFFF" />
+                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
-    <Grid Background="#06090F">
-        <Rectangle Fill="{StaticResource BackgroundGlowTopLeft}" />
-        <Rectangle Fill="{StaticResource BackgroundGlowTopRight}" />
-        <Rectangle Fill="{StaticResource BackgroundGlowBottom}" />
+    <Grid Background="{Binding BackgroundBaseBrush}">
+        <Rectangle Fill="{Binding GlowTopLeftBrush}" />
+        <Rectangle Fill="{Binding GlowTopRightBrush}" />
+        <Rectangle Fill="{Binding GlowBottomBrush}" />
         <Rectangle Fill="{StaticResource DotGridBrush}" Opacity="0.8" />
 
         <Grid Margin="64">
@@ -74,7 +124,7 @@
                         BorderBrush="#24FFFFFF"
                         BorderThickness="1">
                     <StackPanel>
-                        <controls:DotMatrixTextBlock Text="DOT LOCK"
+                        <controls:DotMatrixTextBlock Text="{Binding TitleText}"
                                                      DotSize="6"
                                                      DotGap="4"
                                                      CharacterSpacing="2"
@@ -120,7 +170,7 @@
                                                  OffBrush="#102CCEFF"
                                                  GlowBrush="#5025E9FF" />
                     <controls:DotMatrixTextBlock HorizontalAlignment="Right"
-                                                 Text="ENTER TO DISMISS"
+                                                 Text="{Binding DismissText}"
                                                  DotSize="3"
                                                  DotGap="3"
                                                  CharacterSpacing="1"
@@ -130,5 +180,256 @@
                 </DockPanel>
             </Border>
         </Grid>
+
+        <Button Style="{StaticResource IconBtn}"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="28"
+                Command="{Binding ToggleSettingsPanelCommand}"
+                ToolTip="Settings"
+                Content="⚙" />
+
+        <Border HorizontalAlignment="Right"
+                VerticalAlignment="Stretch"
+                Width="360"
+                Background="#EE060912"
+                BorderBrush="#28FFFFFF"
+                BorderThickness="1,0,0,0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSettingsPanelOpen}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="28,36,28,28">
+                    <DockPanel Margin="0,0,0,28">
+                        <Button DockPanel.Dock="Right"
+                                Style="{StaticResource IconBtn}"
+                                Command="{Binding ToggleSettingsPanelCommand}"
+                                FontSize="14"
+                                Content="×" />
+                        <controls:DotMatrixTextBlock Text="SETTINGS"
+                                                     DotSize="5"
+                                                     DotGap="3"
+                                                     CharacterSpacing="2"
+                                                     OnBrush="#FFFFFFFF"
+                                                     OffBrush="#18FFFFFF"
+                                                     GlowBrush="#60FFFFFF"
+                                                     VerticalAlignment="Center" />
+                    </DockPanel>
+
+                    <TextBlock Text="TEXTS"
+                               Foreground="#60FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               Margin="0,0,0,12" />
+
+                    <TextBlock Text="Title"
+                               Foreground="#70FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="11"
+                               Margin="0,0,0,4" />
+                    <Border Background="#14FFFFFF"
+                            BorderBrush="#22FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Margin="0,0,0,14">
+                        <TextBox Style="{StaticResource SettingsInput}"
+                                 Text="{Binding TitleText, UpdateSourceTrigger=PropertyChanged}" />
+                    </Border>
+
+                    <TextBlock Text="Status Message"
+                               Foreground="#70FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="11"
+                               Margin="0,0,0,4" />
+                    <Border Background="#14FFFFFF"
+                            BorderBrush="#22FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Margin="0,0,0,14">
+                        <TextBox Style="{StaticResource SettingsInput}"
+                                 Text="{Binding StatusMessage, UpdateSourceTrigger=PropertyChanged}" />
+                    </Border>
+
+                    <TextBlock Text="Dismiss Hint"
+                               Foreground="#70FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="11"
+                               Margin="0,0,0,4" />
+                    <Border Background="#14FFFFFF"
+                            BorderBrush="#22FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Margin="0,0,0,6">
+                        <TextBox Style="{StaticResource SettingsInput}"
+                                 Text="{Binding DismissText, UpdateSourceTrigger=PropertyChanged}" />
+                    </Border>
+
+                    <TextBlock Text="Supported: A-Z  0-9  Space  .  :  -"
+                               Foreground="#35FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               Margin="0,0,0,28" />
+
+                    <TextBlock Text="BACKGROUND COLOR"
+                               Foreground="#60FFFFFF"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               Margin="0,0,0,12" />
+
+                    <Border Background="#14FFFFFF"
+                            BorderBrush="#22FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Padding="10"
+                            Margin="0,0,0,10">
+                        <DockPanel LastChildFill="False">
+                            <StackPanel Orientation="Horizontal"
+                                        DockPanel.Dock="Left">
+                                <Ellipse Width="14"
+                                         Height="14"
+                                         Fill="{Binding BackgroundBaseBrush}"
+                                         Stroke="#55FFFFFF"
+                                         StrokeThickness="1"
+                                         Margin="0,0,8,0" />
+                                <TextBlock Text="{Binding SelectedTheme}"
+                                           Foreground="#E8FFFFFF"
+                                           FontFamily="Consolas"
+                                           FontSize="12"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Button DockPanel.Dock="Right"
+                                    Style="{StaticResource ThemeBtn}"
+                                    Command="{Binding ToggleColorPaletteCommand}"
+                                    Content="CHOOSE" />
+                        </DockPanel>
+                    </Border>
+
+                    <Border Background="#0EFFFFFF"
+                            BorderBrush="#18FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="12"
+                            Padding="10"
+                            Margin="0,0,0,20">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsColorPaletteOpen}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <UniformGrid Columns="2">
+                            <Button Margin="0,0,6,6"
+                                    Command="{Binding ApplyThemeCommand}"
+                                    CommandParameter="Blue">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ThemeBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedTheme}" Value="Blue">
+                                                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="#3658FF" Margin="0,0,7,0" />
+                                    <TextBlock Text="BLUE" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Margin="0,0,0,6"
+                                    Command="{Binding ApplyThemeCommand}"
+                                    CommandParameter="Purple">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ThemeBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedTheme}" Value="Purple">
+                                                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="#8200FF" Margin="0,0,7,0" />
+                                    <TextBlock Text="PURPLE" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Margin="0,0,6,6"
+                                    Command="{Binding ApplyThemeCommand}"
+                                    CommandParameter="Green">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ThemeBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedTheme}" Value="Green">
+                                                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="#00C850" Margin="0,0,7,0" />
+                                    <TextBlock Text="GREEN" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Margin="0,0,0,6"
+                                    Command="{Binding ApplyThemeCommand}"
+                                    CommandParameter="Ember">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ThemeBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedTheme}" Value="Ember">
+                                                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="#FF2800" Margin="0,0,7,0" />
+                                    <TextBlock Text="EMBER" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Margin="0,0,6,0"
+                                    Command="{Binding ApplyThemeCommand}"
+                                    CommandParameter="Mono">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ThemeBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedTheme}" Value="Mono">
+                                                <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+                                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="#AAAAAA" Margin="0,0,7,0" />
+                                    <TextBlock Text="MONO" />
+                                </StackPanel>
+                            </Button>
+                        </UniformGrid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Window>

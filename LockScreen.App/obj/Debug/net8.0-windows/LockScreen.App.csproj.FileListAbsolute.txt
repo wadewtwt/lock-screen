@@ -24,3 +24,4 @@ D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App.ge
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\ref\LockScreen.App.dll
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App_MarkupCompile.lref
+D:\work\ai\lock-screen\LockScreen.App\obj\Debug\net8.0-windows\LockScreen.App.sourcelink.json

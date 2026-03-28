@@ -24,11 +24,31 @@ public partial class App : System.Windows.Application
             .WriteTo.File("logs/lockscreen-.log", rollingInterval: RollingInterval.Day)
             .CreateLogger();
 
-        _sharedViewModel = new MainWindowViewModel(_logger);
-        ShutdownMode = ShutdownMode.OnExplicitShutdown;
-        SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
-        RebuildLockWindows();
-        _logger.Information("Application started.");
+        // 捕获未处理异常，写入日志便于排查
+        AppDomain.CurrentDomain.UnhandledException += (_, ex) =>
+            _logger?.Fatal(ex.ExceptionObject as Exception, "Unhandled domain exception");
+
+        DispatcherUnhandledException += (_, ex) =>
+        {
+            _logger?.Fatal(ex.Exception, "Unhandled dispatcher exception");
+            ex.Handled = true;          // 不让程序崩掉，继续运行
+        };
+
+        try
+        {
+            _sharedViewModel = new MainWindowViewModel(_logger);
+            ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
+            RebuildLockWindows();
+            _logger.Information("Application started.");
+        }
+        catch (Exception ex)
+        {
+            _logger?.Fatal(ex, "Fatal error during startup");
+            System.Windows.MessageBox.Show($"启动失败：{ex.Message}\n\n详情见 logs/ 目录", "LockScreen Error",
+                System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            Shutdown(1);
+        }
     }
 
     protected override void OnExit(ExitEventArgs e)
