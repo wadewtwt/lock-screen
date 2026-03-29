@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="E00CF7E8.dotlockpro"
+    Publisher="CN=E955722F-5C1A-42BD-9F54-E9CE1057EDBD"
+    Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>dot lock pro</DisplayName>
+    <PublisherDisplayName>蜗牛使劲冲</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily
+      Name="Windows.Desktop"
+      MinVersion="10.0.17763.0"
+      MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application
+      Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="dot lock pro"
+        Description="A dot matrix style desktop lock screen for Windows"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\LockScreenLogo.png"
+        Square44x44Logo="Assets\LockScreenLogoSmall.png">
+        <uap:DefaultTile
+          Wide310x150Logo="Assets\LockScreenWideLogo.png"
+          Square310x310Logo="Assets\LockScreenLargeLogo.png"
+          ShortName="LockScreen" />
+        <uap:SplashScreen Image="Assets\LockScreenSplash.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>
+

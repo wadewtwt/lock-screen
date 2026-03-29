@@ -103,23 +103,19 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void HandleKeyPress(Key key)
     {
-        if (IsSettingsPanelOpen)
+        if (key == Key.Enter)
         {
-            if (key is Key.Escape or Key.Enter)
-            {
-                IsSettingsPanelOpen = false;
-                IsColorPaletteOpen = false;
-            }
+            _logger.Information("Lock screen dismissed with Enter key.");
+            System.Windows.Application.Current.Shutdown();
             return;
         }
 
-        if (key != Key.Enter)
+        if (IsSettingsPanelOpen && key == Key.Escape)
         {
+            IsSettingsPanelOpen = false;
+            IsColorPaletteOpen = false;
             return;
         }
-
-        _logger.Information("Lock screen dismissed with Enter key.");
-        System.Windows.Application.Current.Shutdown();
     }
 
     [RelayCommand]

@@ -1,0 +1,35 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+publish/
+out/
+
+# Package artifacts
+artifacts/
+LockScreen.Package/BundleArtifacts/
+*.appx
+*.appxbundle
+*.appxupload
+*.appxsym
+*.msix
+*.msixbundle
+*.msixupload
+*.appxrecipe
+*.pri
+
+# Logs
+logs/
+*.log
+
+# IDE and local user files
+.vs/
+.vscode/
+tools/vs_BuildTools.exe
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS files
+.DS_Store
+Thumbs.db

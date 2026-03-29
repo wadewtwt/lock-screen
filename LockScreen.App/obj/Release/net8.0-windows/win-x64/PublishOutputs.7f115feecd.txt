@@ -1,2 +1,0 @@
-D:\work\ai\lock-screen\artifacts\single-file\win-x64\LockScreen.App.pdb
-D:\work\ai\lock-screen\artifacts\single-file\win-x64\LockScreen.App.exe
