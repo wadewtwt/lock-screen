@@ -42,6 +42,18 @@ function Resolve-MSBuild {
 $resolvedPackageProject = Resolve-Path $PackageProject
 $resolvedOutput = Resolve-Path (New-Item -ItemType Directory -Force -Path $OutputDir)
 $msbuildPath = Resolve-MSBuild
+$packageProjectDir = Split-Path -Parent $resolvedPackageProject
+
+$staleBuildPaths = @(
+    (Join-Path $packageProjectDir "bin\$Platform\$Configuration\Upload"),
+    (Join-Path $packageProjectDir "obj\$Platform\$Configuration\Upload")
+)
+
+foreach ($stalePath in $staleBuildPaths) {
+    if (Test-Path $stalePath) {
+        Remove-Item -LiteralPath $stalePath -Recurse -Force
+    }
+}
 
 Write-Host "Building MSIX package..." -ForegroundColor Cyan
 Write-Host "MSBuild: $msbuildPath"
