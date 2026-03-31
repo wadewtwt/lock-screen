@@ -46,7 +46,6 @@ This privacy policy may be updated in the future if the app's behavior changes. 
 ## Contact
 
 Developer: 蜗牛使劲冲
-
 Support phone: 18094416520
 
 Project page: https://github.com/wadewtwt/lock-screen

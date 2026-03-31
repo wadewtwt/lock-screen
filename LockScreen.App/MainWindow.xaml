@@ -221,7 +221,7 @@
                     BorderThickness="1"
                     CornerRadius="12"
                     Visibility="Collapsed">
-                <TextBlock Text="setting me"
+                <TextBlock Text="SETTINGS"
                            Foreground="#E8FFFFFF"
                            FontFamily="Consolas"
                            FontSize="11" />
@@ -232,7 +232,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding ToggleSettingsPanelCommand}"
                     ToolTip="Settings"
-                    Content="⚙" />
+                    Content="S" />
         </Grid>
 
         <Rectangle Fill="#01000000"
@@ -273,7 +273,7 @@
                         <Button DockPanel.Dock="Right"
                                 Style="{StaticResource SmallIconBtn}"
                                 Command="{Binding ToggleSettingsPanelCommand}"
-                                Content="×" />
+                                Content="X" />
                         <controls:DotMatrixTextBlock Text="SETTINGS"
                                                      DotSize="4"
                                                      DotGap="2"
