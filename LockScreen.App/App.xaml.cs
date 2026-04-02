@@ -1,10 +1,10 @@
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
+using LockScreen.App.Native;
 using LockScreen.App.ViewModels;
 using Serilog;
 using Serilog.Core;
-using FormsScreen = System.Windows.Forms.Screen;
 
 namespace LockScreen.App;
 
@@ -83,7 +83,7 @@ public partial class App : System.Windows.Application
 
         _windows.Clear();
 
-        var screens = FormsScreen.AllScreens;
+        var screens = DisplayMonitor.GetAll();
         foreach (var screen in screens)
         {
             var window = new MainWindow(_sharedViewModel!, screen.Bounds);
@@ -92,7 +92,7 @@ public partial class App : System.Windows.Application
         }
 
         MainWindow = _windows.FirstOrDefault();
-        _logger.Information("Lock windows active on {ScreenCount} screen(s).", screens.Length);
+        _logger.Information("Lock windows active on {ScreenCount} screen(s).", screens.Count);
     }
 
     private static string GetWritableLogDirectory()

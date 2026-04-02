@@ -8,11 +8,11 @@
   <Identity
     Name="E00CF7E8.dotlockpro"
     Publisher="CN=E955722F-5C1A-42BD-9F54-E9CE1057EDBD"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <Properties>
     <DisplayName>dot lock pro</DisplayName>
-    <PublisherDisplayName>蜗牛使劲冲</PublisherDisplayName>
+    <PublisherDisplayName>&#x8717;&#x725B;&#x4F7F;&#x52B2;&#x51B2;</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

@@ -9,11 +9,11 @@ namespace LockScreen.App;
 
 public partial class MainWindow : Window
 {
-    private readonly System.Drawing.Rectangle _screenBounds;
+    private readonly ScreenBounds _screenBounds;
     private readonly DispatcherTimer _settingsHintCycleTimer;
     private readonly DispatcherTimer _settingsHintHideTimer;
 
-    public MainWindow(MainWindowViewModel viewModel, System.Drawing.Rectangle screenBounds)
+    public MainWindow(MainWindowViewModel viewModel, ScreenBounds screenBounds)
     {
         InitializeComponent();
         DataContext = viewModel;

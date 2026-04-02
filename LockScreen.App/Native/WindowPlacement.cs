@@ -18,7 +18,7 @@ internal static class WindowPlacement
         int cy,
         uint uFlags);
 
-    public static void MoveToScreenBounds(IntPtr windowHandle, System.Drawing.Rectangle bounds)
+    public static void MoveToScreenBounds(IntPtr windowHandle, ScreenBounds bounds)
     {
         SetWindowPos(
             windowHandle,
